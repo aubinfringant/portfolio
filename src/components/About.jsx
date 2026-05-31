@@ -9,7 +9,7 @@ export default function About() {
           Qui je suis
         </h2>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', alignItems: 'center'}}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
             <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8 }}>
               Je m'appelle <strong style={{ color: 'var(--text-primary)' }}>Aubin Fringant</strong>, étudiant en
