@@ -1,0 +1,36 @@
+:root {
+  /* Couleurs principales */
+  --bg-primary:    #0f172a;
+  --bg-secondary:  #1e293b;
+  --bg-card:       #1e2d3d;
+  --border:        #334155;
+
+  /* Accent bleu terminal */
+  --accent:        #38bdf8;
+  --accent-dim:    #0ea5e9;
+  --accent-glow:   rgba(56, 189, 248, 0.15);
+
+  /* Texte */
+  --text-primary:  #f1f5f9;
+  --text-secondary:#94a3b8;
+  --text-muted:    #64748b;
+
+  /* Semantic */
+  --success:       #4ade80;
+  --warning:       #fbbf24;
+  --error:         #f87171;
+
+  /* Typo */
+  --font-mono:     'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --font-sans:     'Inter', system-ui, sans-serif;
+
+  /* Spacing */
+  --radius-sm:     4px;
+  --radius-md:     8px;
+  --radius-lg:     12px;
+  --radius-xl:     20px;
+
+  /* Transitions */
+  --transition:    0.2s ease;
+  --transition-slow: 0.4s ease;
+}
