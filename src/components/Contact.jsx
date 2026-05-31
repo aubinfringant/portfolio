@@ -6,7 +6,7 @@ const EMAILJS_TEMPLATE = 'template_y4hfhv4'
 const EMAILJS_KEY      = 'IwgaoqLnmNquo23TI'
 
 export default function Contact() {
-  const [form, setForm]     = useState({ from_name: '', from_email: '', message: '' })
+  const [form, setForm] = useState({ from_name: '', from_email: '', message: '' })
   const [status, setStatus] = useState(null)
 
   const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
@@ -15,12 +15,15 @@ export default function Contact() {
     e.preventDefault()
     setStatus('loading')
     try {
-      await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, form, EMAILJS_KEY)
-      setStatus('success')
-      setForm({ from_name: '', from_email: '', message: '' })
-    } catch {
-      setStatus('error')
-    }
+  await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
+    ...form,
+    time: new Date().toLocaleString('fr-FR'),
+  }, EMAILJS_KEY)
+  setStatus('success')
+  setForm({ from_name: '', from_email: '', message: '' })
+} catch {
+  setStatus('error')
+}
   }
 
   const inputStyle = {
@@ -41,8 +44,8 @@ export default function Contact() {
           Travaillons ensemble
         </h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: '2.5rem', lineHeight: 1.7 }}>
-          Vous avez un projet, une opportunité d'alternance, ou juste envie d'échanger ?
-          Je lis tous les messages.
+          Vous avez un projet, une opportunité d'alternance/stage, ou juste envie d'échanger ?
+          Je lis tous les messages et je répond le plus rapidement possible.
         </p>
 
         <div style={{ maxWidth: 640 }}>

@@ -11,10 +11,10 @@ export default function Footer() {
     }}>
       <p>
         <span style={{ color: 'var(--accent)' }}>Aubin Fringant</span>
-        {' '}· Fait avec React + Vite · {year}
+        {' '}· {year}
       </p>
       <div style={{ marginTop: '0.75rem', display: 'flex', justifyContent: 'center', gap: '1.5rem' }}>
-        <a href="https://github.com/AubinFringant" target="_blank" rel="noopener noreferrer"
+        <a href="https://github.com/aubinfringant" target="_blank" rel="noopener noreferrer"
            style={{ color: 'var(--text-muted)' }}
            onMouseEnter={e => e.target.style.color = 'var(--accent)'}
            onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}>
