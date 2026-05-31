@@ -1,8 +1,13 @@
 import { useState } from 'react'
+import emailjs from '@emailjs/browser'
+
+const EMAILJS_SERVICE  = 'service_c8j0p8l'
+const EMAILJS_TEMPLATE = 'template_y4hfhv4'
+const EMAILJS_KEY      = 'IwgaoqLnmNquo23TI'
 
 export default function Contact() {
-  const [form, setForm]     = useState({ name: '', email: '', message: '' })
-  const [status, setStatus] = useState(null) // null | 'loading' | 'success' | 'error'
+  const [form, setForm]     = useState({ from_name: '', from_email: '', message: '' })
+  const [status, setStatus] = useState(null)
 
   const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
 
@@ -10,18 +15,9 @@ export default function Contact() {
     e.preventDefault()
     setStatus('loading')
     try {
-      const res = await fetch('/api/contact.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      })
-      const data = await res.json()
-      if (data.success) {
-        setStatus('success')
-        setForm({ name: '', email: '', message: '' })
-      } else {
-        setStatus('error')
-      }
+      await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, form, EMAILJS_KEY)
+      setStatus('success')
+      setForm({ from_name: '', from_email: '', message: '' })
     } catch {
       setStatus('error')
     }
@@ -48,17 +44,18 @@ export default function Contact() {
           Vous avez un projet, une opportunité d'alternance, ou juste envie d'échanger ?
           Je lis tous les messages.
         </p>
+
         <div style={{ maxWidth: 640 }}>
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-              <input name="name" required placeholder="Votre nom"
-                value={form.name} onChange={handleChange}
+              <input name="from_name" required placeholder="Votre nom"
+                value={form.from_name} onChange={handleChange}
                 style={inputStyle}
                 onFocus={e => e.target.style.borderColor = 'var(--accent)'}
                 onBlur={e => e.target.style.borderColor = 'var(--border)'}
               />
-              <input name="email" type="email" required placeholder="Votre email"
-                value={form.email} onChange={handleChange}
+              <input name="from_email" type="email" required placeholder="Votre email"
+                value={form.from_email} onChange={handleChange}
                 style={inputStyle}
                 onFocus={e => e.target.style.borderColor = 'var(--accent)'}
                 onBlur={e => e.target.style.borderColor = 'var(--border)'}
@@ -89,7 +86,7 @@ export default function Contact() {
             )}
             {status === 'error' && (
               <p style={{ color: 'var(--error)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
-                ✗ Erreur. Essayez par email directement.
+                ✗ Erreur d'envoi. Réessayez ou contactez-moi directement.
               </p>
             )}
           </form>
